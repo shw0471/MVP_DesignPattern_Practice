@@ -1,4 +1,4 @@
-package com.example.mvpdesignpatternpractice.View;
+package com.example.mvpdesignpatternpractice.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,13 +8,15 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mvpdesignpatternpractice.Contract.MainContract;
-import com.example.mvpdesignpatternpractice.Model.Human;
-import com.example.mvpdesignpatternpractice.Presenter.MainPresenter;
 import com.example.mvpdesignpatternpractice.R;
 import com.example.mvpdesignpatternpractice.adapter.HumanListAdapter;
+import com.example.mvpdesignpatternpractice.contract.MainContract;
+import com.example.mvpdesignpatternpractice.model.Human;
+import com.example.mvpdesignpatternpractice.presenter.MainPresenter;
 
 import java.util.List;
+
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
@@ -30,7 +32,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainPresenter = new MainPresenter(this, this);
+        Realm.init(this);
+
+        mainPresenter = new MainPresenter(this);
 
         et_name = findViewById(R.id.et_name);
         et_age = findViewById(R.id.et_age);
@@ -56,12 +60,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void setRecyclerView(List<Human> humanList) {
+    public void setHumanList(List<Human> humanList) {
         humanListAdapter.setHumanList(humanList);
     }
 
     @Override
-    public void addRecyclerView(List<Human> humanList) {
-        humanListAdapter.addHumanList(humanList);
+    public void addHuman(Human human) {
+        humanListAdapter.addHuman(human);
     }
 }

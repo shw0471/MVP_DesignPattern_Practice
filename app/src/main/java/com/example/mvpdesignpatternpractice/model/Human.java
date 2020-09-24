@@ -1,4 +1,4 @@
-package com.example.mvpdesignpatternpractice.Model;
+package com.example.mvpdesignpatternpractice.model;
 
 import io.realm.RealmObject;
 

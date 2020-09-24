@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mvpdesignpatternpractice.Model.Human;
 import com.example.mvpdesignpatternpractice.R;
+import com.example.mvpdesignpatternpractice.model.Human;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class HumanListAdapter extends RecyclerView.Adapter<HumanListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.item_human, parent, false);
         return new ViewHolder(view);
@@ -31,8 +31,11 @@ public class HumanListAdapter extends RecyclerView.Adapter<HumanListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_name.setText(humanList.get(position).getName());
-        holder.tv_age.setText(Integer.toString(humanList.get(position).getAge()));
+        String name = humanList.get(position).getName();
+        String age = Integer.toString(humanList.get(position).getAge());
+
+        holder.tv_name.setText(name);
+        holder.tv_age.setText(age);
     }
 
     @Override
@@ -45,8 +48,8 @@ public class HumanListAdapter extends RecyclerView.Adapter<HumanListAdapter.View
         notifyDataSetChanged();
     }
 
-    public void addHumanList(List<Human> list) {
-        humanList = list;
+    public void addHuman(Human human) {
+        humanList.add(human);
         notifyItemChanged(getItemCount() - 1);
     }
 
