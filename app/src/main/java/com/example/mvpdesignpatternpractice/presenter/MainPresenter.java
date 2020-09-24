@@ -1,6 +1,6 @@
 package com.example.mvpdesignpatternpractice.presenter;
 
-import com.example.mvpdesignpatternpractice.Callback;
+import com.example.mvpdesignpatternpractice.HumanModelCallback;
 import com.example.mvpdesignpatternpractice.contract.MainContract;
 import com.example.mvpdesignpatternpractice.model.Human;
 import com.example.mvpdesignpatternpractice.model.MainModel;
@@ -14,9 +14,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     public MainPresenter(MainContract.View viewParam) {
         view = viewParam;
-        model = new MainModel();
-
-        model.setCallBack(new Callback() {
+        model = new MainModel(new HumanModelCallback() {
             @Override
             public void setList(List<Human> humanList) {
                 view.setHumanList(humanList);

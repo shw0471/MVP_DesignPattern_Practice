@@ -1,6 +1,6 @@
 package com.example.mvpdesignpatternpractice.model;
 
-import com.example.mvpdesignpatternpractice.Callback;
+import com.example.mvpdesignpatternpractice.HumanModelCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,10 @@ public class MainModel {
 
     Realm realm;
     Human human;
-    private Callback callback;
+    private HumanModelCallback callback;
 
-    public MainModel() {
+    public MainModel(HumanModelCallback callback) {
         realm = Realm.getDefaultInstance();
-    }
-
-    public void setCallBack(Callback callback) {
         this.callback = callback;
     }
 
